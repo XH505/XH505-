@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>إعدادات زاد XH505</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 20px;
+    }
+    .box {
+      background: #020617;
+      border: 1px solid #1f2937;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      color: #f97316;
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #9ca3af;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      margin-top: 4px;
+    }
+    button {
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: #f97316;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #111827;
+      font-size: 14px;
+    }
+    .result {
+      margin-top: 16px;
+      padding: 10px;
+      background: #111827;
+      border-radius: 8px;
+      min-height: 40px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<label>مفتاح API</label>
+  <input type="text" id="apiKey" placeholder="AIzaSyAITlJZgBG_n50wS0-CDJjRVXXoaRlrFJY">
+<div class="box">
+  <h2>إعدادات الذكاء الاصطناعي</h2>
+
+  <button onclick="saveKey()">حفظ المفتاح</button>
+  <button onclick="autoSetup()">ربط النماذج تلقائيًا</button>
+  <button onclick="testConnection()">اختبار الاتصال</button>
+
+  <div id="result" class="result"></div>
+</div>
+
+<script>
+function saveKey() {
+  const key = document.getElementById("apiKey").value.trim();
+  google.script.run
+    .withSuccessHandler(r => document.getElementById("result").textContent = r)
+    .saveApiKeyToProperties(key);
+}
+
+function autoSetup() {
+  google.script.run
+    .withSuccessHandler(r => document.getElementById("result").textContent = r)
+    .autoSetupModels();
+}
+
+function testConnection() {
+  google.script.run
+    .withSuccessHandler(r => document.getElementById("result").textContent = r)
+    .testAiConnection();
+}
+</script>
+
+</body>
+</html>
